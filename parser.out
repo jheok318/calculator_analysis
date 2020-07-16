@@ -1,0 +1,481 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> calc_grammar
+Rule 1     calc_grammar -> expr SEMI
+Rule 2     expr -> operation_expression
+Rule 3     operation_expression -> expr PLUS expr
+Rule 4     operation_expression -> expr MINUS expr
+Rule 5     operation_expression -> expr MULTI expr
+Rule 6     operation_expression -> expr DIVIDE expr
+Rule 7     operation_expression -> expr EQUALS expr
+Rule 8     expr -> LPAREN expr RPAREN
+Rule 9     expr -> term
+Rule 10    term -> MINUS term
+Rule 11    term -> STRING
+Rule 12    term -> NUMBER
+
+Terminals, with rules where they appear
+
+DIVIDE               : 6
+EQUALS               : 7
+LPAREN               : 8
+MINUS                : 4 10
+MULTI                : 5
+NUMBER               : 12
+PLUS                 : 3
+RPAREN               : 8
+SEMI                 : 1
+STRING               : 11
+error                : 
+
+Nonterminals, with rules where they appear
+
+calc_grammar         : 0
+expr                 : 1 3 3 4 4 5 5 6 6 7 7 8
+operation_expression : 2
+term                 : 9 10
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . calc_grammar
+    (1) calc_grammar -> . expr SEMI
+    (2) expr -> . operation_expression
+    (8) expr -> . LPAREN expr RPAREN
+    (9) expr -> . term
+    (3) operation_expression -> . expr PLUS expr
+    (4) operation_expression -> . expr MINUS expr
+    (5) operation_expression -> . expr MULTI expr
+    (6) operation_expression -> . expr DIVIDE expr
+    (7) operation_expression -> . expr EQUALS expr
+    (10) term -> . MINUS term
+    (11) term -> . STRING
+    (12) term -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    MINUS           shift and go to state 6
+    STRING          shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    calc_grammar                   shift and go to state 1
+    expr                           shift and go to state 2
+    operation_expression           shift and go to state 3
+    term                           shift and go to state 5
+
+state 1
+
+    (0) S' -> calc_grammar .
+
+
+
+state 2
+
+    (1) calc_grammar -> expr . SEMI
+    (3) operation_expression -> expr . PLUS expr
+    (4) operation_expression -> expr . MINUS expr
+    (5) operation_expression -> expr . MULTI expr
+    (6) operation_expression -> expr . DIVIDE expr
+    (7) operation_expression -> expr . EQUALS expr
+
+    SEMI            shift and go to state 9
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    MULTI           shift and go to state 12
+    DIVIDE          shift and go to state 13
+    EQUALS          shift and go to state 14
+
+
+state 3
+
+    (2) expr -> operation_expression .
+
+    SEMI            reduce using rule 2 (expr -> operation_expression .)
+    PLUS            reduce using rule 2 (expr -> operation_expression .)
+    MINUS           reduce using rule 2 (expr -> operation_expression .)
+    MULTI           reduce using rule 2 (expr -> operation_expression .)
+    DIVIDE          reduce using rule 2 (expr -> operation_expression .)
+    EQUALS          reduce using rule 2 (expr -> operation_expression .)
+    RPAREN          reduce using rule 2 (expr -> operation_expression .)
+
+
+state 4
+
+    (8) expr -> LPAREN . expr RPAREN
+    (2) expr -> . operation_expression
+    (8) expr -> . LPAREN expr RPAREN
+    (9) expr -> . term
+    (3) operation_expression -> . expr PLUS expr
+    (4) operation_expression -> . expr MINUS expr
+    (5) operation_expression -> . expr MULTI expr
+    (6) operation_expression -> . expr DIVIDE expr
+    (7) operation_expression -> . expr EQUALS expr
+    (10) term -> . MINUS term
+    (11) term -> . STRING
+    (12) term -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    MINUS           shift and go to state 6
+    STRING          shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    expr                           shift and go to state 15
+    operation_expression           shift and go to state 3
+    term                           shift and go to state 5
+
+state 5
+
+    (9) expr -> term .
+
+    SEMI            reduce using rule 9 (expr -> term .)
+    PLUS            reduce using rule 9 (expr -> term .)
+    MINUS           reduce using rule 9 (expr -> term .)
+    MULTI           reduce using rule 9 (expr -> term .)
+    DIVIDE          reduce using rule 9 (expr -> term .)
+    EQUALS          reduce using rule 9 (expr -> term .)
+    RPAREN          reduce using rule 9 (expr -> term .)
+
+
+state 6
+
+    (10) term -> MINUS . term
+    (10) term -> . MINUS term
+    (11) term -> . STRING
+    (12) term -> . NUMBER
+
+    MINUS           shift and go to state 6
+    STRING          shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    term                           shift and go to state 16
+
+state 7
+
+    (11) term -> STRING .
+
+    SEMI            reduce using rule 11 (term -> STRING .)
+    PLUS            reduce using rule 11 (term -> STRING .)
+    MINUS           reduce using rule 11 (term -> STRING .)
+    MULTI           reduce using rule 11 (term -> STRING .)
+    DIVIDE          reduce using rule 11 (term -> STRING .)
+    EQUALS          reduce using rule 11 (term -> STRING .)
+    RPAREN          reduce using rule 11 (term -> STRING .)
+
+
+state 8
+
+    (12) term -> NUMBER .
+
+    SEMI            reduce using rule 12 (term -> NUMBER .)
+    PLUS            reduce using rule 12 (term -> NUMBER .)
+    MINUS           reduce using rule 12 (term -> NUMBER .)
+    MULTI           reduce using rule 12 (term -> NUMBER .)
+    DIVIDE          reduce using rule 12 (term -> NUMBER .)
+    EQUALS          reduce using rule 12 (term -> NUMBER .)
+    RPAREN          reduce using rule 12 (term -> NUMBER .)
+
+
+state 9
+
+    (1) calc_grammar -> expr SEMI .
+
+    $end            reduce using rule 1 (calc_grammar -> expr SEMI .)
+
+
+state 10
+
+    (3) operation_expression -> expr PLUS . expr
+    (2) expr -> . operation_expression
+    (8) expr -> . LPAREN expr RPAREN
+    (9) expr -> . term
+    (3) operation_expression -> . expr PLUS expr
+    (4) operation_expression -> . expr MINUS expr
+    (5) operation_expression -> . expr MULTI expr
+    (6) operation_expression -> . expr DIVIDE expr
+    (7) operation_expression -> . expr EQUALS expr
+    (10) term -> . MINUS term
+    (11) term -> . STRING
+    (12) term -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    MINUS           shift and go to state 6
+    STRING          shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    expr                           shift and go to state 17
+    operation_expression           shift and go to state 3
+    term                           shift and go to state 5
+
+state 11
+
+    (4) operation_expression -> expr MINUS . expr
+    (2) expr -> . operation_expression
+    (8) expr -> . LPAREN expr RPAREN
+    (9) expr -> . term
+    (3) operation_expression -> . expr PLUS expr
+    (4) operation_expression -> . expr MINUS expr
+    (5) operation_expression -> . expr MULTI expr
+    (6) operation_expression -> . expr DIVIDE expr
+    (7) operation_expression -> . expr EQUALS expr
+    (10) term -> . MINUS term
+    (11) term -> . STRING
+    (12) term -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    MINUS           shift and go to state 6
+    STRING          shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    expr                           shift and go to state 18
+    operation_expression           shift and go to state 3
+    term                           shift and go to state 5
+
+state 12
+
+    (5) operation_expression -> expr MULTI . expr
+    (2) expr -> . operation_expression
+    (8) expr -> . LPAREN expr RPAREN
+    (9) expr -> . term
+    (3) operation_expression -> . expr PLUS expr
+    (4) operation_expression -> . expr MINUS expr
+    (5) operation_expression -> . expr MULTI expr
+    (6) operation_expression -> . expr DIVIDE expr
+    (7) operation_expression -> . expr EQUALS expr
+    (10) term -> . MINUS term
+    (11) term -> . STRING
+    (12) term -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    MINUS           shift and go to state 6
+    STRING          shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    expr                           shift and go to state 19
+    operation_expression           shift and go to state 3
+    term                           shift and go to state 5
+
+state 13
+
+    (6) operation_expression -> expr DIVIDE . expr
+    (2) expr -> . operation_expression
+    (8) expr -> . LPAREN expr RPAREN
+    (9) expr -> . term
+    (3) operation_expression -> . expr PLUS expr
+    (4) operation_expression -> . expr MINUS expr
+    (5) operation_expression -> . expr MULTI expr
+    (6) operation_expression -> . expr DIVIDE expr
+    (7) operation_expression -> . expr EQUALS expr
+    (10) term -> . MINUS term
+    (11) term -> . STRING
+    (12) term -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    MINUS           shift and go to state 6
+    STRING          shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    expr                           shift and go to state 20
+    operation_expression           shift and go to state 3
+    term                           shift and go to state 5
+
+state 14
+
+    (7) operation_expression -> expr EQUALS . expr
+    (2) expr -> . operation_expression
+    (8) expr -> . LPAREN expr RPAREN
+    (9) expr -> . term
+    (3) operation_expression -> . expr PLUS expr
+    (4) operation_expression -> . expr MINUS expr
+    (5) operation_expression -> . expr MULTI expr
+    (6) operation_expression -> . expr DIVIDE expr
+    (7) operation_expression -> . expr EQUALS expr
+    (10) term -> . MINUS term
+    (11) term -> . STRING
+    (12) term -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    MINUS           shift and go to state 6
+    STRING          shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    expr                           shift and go to state 21
+    operation_expression           shift and go to state 3
+    term                           shift and go to state 5
+
+state 15
+
+    (8) expr -> LPAREN expr . RPAREN
+    (3) operation_expression -> expr . PLUS expr
+    (4) operation_expression -> expr . MINUS expr
+    (5) operation_expression -> expr . MULTI expr
+    (6) operation_expression -> expr . DIVIDE expr
+    (7) operation_expression -> expr . EQUALS expr
+
+    RPAREN          shift and go to state 22
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    MULTI           shift and go to state 12
+    DIVIDE          shift and go to state 13
+    EQUALS          shift and go to state 14
+
+
+state 16
+
+    (10) term -> MINUS term .
+
+    SEMI            reduce using rule 10 (term -> MINUS term .)
+    PLUS            reduce using rule 10 (term -> MINUS term .)
+    MINUS           reduce using rule 10 (term -> MINUS term .)
+    MULTI           reduce using rule 10 (term -> MINUS term .)
+    DIVIDE          reduce using rule 10 (term -> MINUS term .)
+    EQUALS          reduce using rule 10 (term -> MINUS term .)
+    RPAREN          reduce using rule 10 (term -> MINUS term .)
+
+
+state 17
+
+    (3) operation_expression -> expr PLUS expr .
+    (3) operation_expression -> expr . PLUS expr
+    (4) operation_expression -> expr . MINUS expr
+    (5) operation_expression -> expr . MULTI expr
+    (6) operation_expression -> expr . DIVIDE expr
+    (7) operation_expression -> expr . EQUALS expr
+
+    SEMI            reduce using rule 3 (operation_expression -> expr PLUS expr .)
+    PLUS            reduce using rule 3 (operation_expression -> expr PLUS expr .)
+    MINUS           reduce using rule 3 (operation_expression -> expr PLUS expr .)
+    EQUALS          reduce using rule 3 (operation_expression -> expr PLUS expr .)
+    RPAREN          reduce using rule 3 (operation_expression -> expr PLUS expr .)
+    MULTI           shift and go to state 12
+    DIVIDE          shift and go to state 13
+
+  ! MULTI           [ reduce using rule 3 (operation_expression -> expr PLUS expr .) ]
+  ! DIVIDE          [ reduce using rule 3 (operation_expression -> expr PLUS expr .) ]
+  ! PLUS            [ shift and go to state 10 ]
+  ! MINUS           [ shift and go to state 11 ]
+  ! EQUALS          [ shift and go to state 14 ]
+
+
+state 18
+
+    (4) operation_expression -> expr MINUS expr .
+    (3) operation_expression -> expr . PLUS expr
+    (4) operation_expression -> expr . MINUS expr
+    (5) operation_expression -> expr . MULTI expr
+    (6) operation_expression -> expr . DIVIDE expr
+    (7) operation_expression -> expr . EQUALS expr
+
+    SEMI            reduce using rule 4 (operation_expression -> expr MINUS expr .)
+    PLUS            reduce using rule 4 (operation_expression -> expr MINUS expr .)
+    MINUS           reduce using rule 4 (operation_expression -> expr MINUS expr .)
+    EQUALS          reduce using rule 4 (operation_expression -> expr MINUS expr .)
+    RPAREN          reduce using rule 4 (operation_expression -> expr MINUS expr .)
+    MULTI           shift and go to state 12
+    DIVIDE          shift and go to state 13
+
+  ! MULTI           [ reduce using rule 4 (operation_expression -> expr MINUS expr .) ]
+  ! DIVIDE          [ reduce using rule 4 (operation_expression -> expr MINUS expr .) ]
+  ! PLUS            [ shift and go to state 10 ]
+  ! MINUS           [ shift and go to state 11 ]
+  ! EQUALS          [ shift and go to state 14 ]
+
+
+state 19
+
+    (5) operation_expression -> expr MULTI expr .
+    (3) operation_expression -> expr . PLUS expr
+    (4) operation_expression -> expr . MINUS expr
+    (5) operation_expression -> expr . MULTI expr
+    (6) operation_expression -> expr . DIVIDE expr
+    (7) operation_expression -> expr . EQUALS expr
+
+    SEMI            reduce using rule 5 (operation_expression -> expr MULTI expr .)
+    PLUS            reduce using rule 5 (operation_expression -> expr MULTI expr .)
+    MINUS           reduce using rule 5 (operation_expression -> expr MULTI expr .)
+    MULTI           reduce using rule 5 (operation_expression -> expr MULTI expr .)
+    DIVIDE          reduce using rule 5 (operation_expression -> expr MULTI expr .)
+    EQUALS          reduce using rule 5 (operation_expression -> expr MULTI expr .)
+    RPAREN          reduce using rule 5 (operation_expression -> expr MULTI expr .)
+
+  ! PLUS            [ shift and go to state 10 ]
+  ! MINUS           [ shift and go to state 11 ]
+  ! MULTI           [ shift and go to state 12 ]
+  ! DIVIDE          [ shift and go to state 13 ]
+  ! EQUALS          [ shift and go to state 14 ]
+
+
+state 20
+
+    (6) operation_expression -> expr DIVIDE expr .
+    (3) operation_expression -> expr . PLUS expr
+    (4) operation_expression -> expr . MINUS expr
+    (5) operation_expression -> expr . MULTI expr
+    (6) operation_expression -> expr . DIVIDE expr
+    (7) operation_expression -> expr . EQUALS expr
+
+    SEMI            reduce using rule 6 (operation_expression -> expr DIVIDE expr .)
+    PLUS            reduce using rule 6 (operation_expression -> expr DIVIDE expr .)
+    MINUS           reduce using rule 6 (operation_expression -> expr DIVIDE expr .)
+    MULTI           reduce using rule 6 (operation_expression -> expr DIVIDE expr .)
+    DIVIDE          reduce using rule 6 (operation_expression -> expr DIVIDE expr .)
+    EQUALS          reduce using rule 6 (operation_expression -> expr DIVIDE expr .)
+    RPAREN          reduce using rule 6 (operation_expression -> expr DIVIDE expr .)
+
+  ! PLUS            [ shift and go to state 10 ]
+  ! MINUS           [ shift and go to state 11 ]
+  ! MULTI           [ shift and go to state 12 ]
+  ! DIVIDE          [ shift and go to state 13 ]
+  ! EQUALS          [ shift and go to state 14 ]
+
+
+state 21
+
+    (7) operation_expression -> expr EQUALS expr .
+    (3) operation_expression -> expr . PLUS expr
+    (4) operation_expression -> expr . MINUS expr
+    (5) operation_expression -> expr . MULTI expr
+    (6) operation_expression -> expr . DIVIDE expr
+    (7) operation_expression -> expr . EQUALS expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTI resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+    SEMI            reduce using rule 7 (operation_expression -> expr EQUALS expr .)
+    RPAREN          reduce using rule 7 (operation_expression -> expr EQUALS expr .)
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    MULTI           shift and go to state 12
+    DIVIDE          shift and go to state 13
+    EQUALS          shift and go to state 14
+
+  ! PLUS            [ reduce using rule 7 (operation_expression -> expr EQUALS expr .) ]
+  ! MINUS           [ reduce using rule 7 (operation_expression -> expr EQUALS expr .) ]
+  ! MULTI           [ reduce using rule 7 (operation_expression -> expr EQUALS expr .) ]
+  ! DIVIDE          [ reduce using rule 7 (operation_expression -> expr EQUALS expr .) ]
+  ! EQUALS          [ reduce using rule 7 (operation_expression -> expr EQUALS expr .) ]
+
+
+state 22
+
+    (8) expr -> LPAREN expr RPAREN .
+
+    SEMI            reduce using rule 8 (expr -> LPAREN expr RPAREN .)
+    PLUS            reduce using rule 8 (expr -> LPAREN expr RPAREN .)
+    MINUS           reduce using rule 8 (expr -> LPAREN expr RPAREN .)
+    MULTI           reduce using rule 8 (expr -> LPAREN expr RPAREN .)
+    DIVIDE          reduce using rule 8 (expr -> LPAREN expr RPAREN .)
+    EQUALS          reduce using rule 8 (expr -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 8 (expr -> LPAREN expr RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 21 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 21 resolved as shift
+WARNING: shift/reduce conflict for MULTI in state 21 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 21 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 21 resolved as shift
