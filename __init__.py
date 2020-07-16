@@ -65,33 +65,36 @@ class QueryType(object):
         names = [x[1] for x in sorted(names)]
 
 
-## Query Tree를 표현하기 위한 Node Class
+# Query Tree를 표현하기 위한 Node Class
 #
 class Node(object):
 
-    ## 생성자
+    # 생성자
     #
     def __init__(self, type=None, children=None, leaf=None, rule=""):
         self.type = type
         self.children = []
         self.leaf = leaf
         self.rule = rule
-        if children: self.children.append(children)
+        if children:
+            self.children.append(children)
 
         self.qk = QueryType.Kind.NONE
 
-    ## 문자열 변환 함수
+    # 문자열 변환 함수
     #
     def __str__(self):
         return "type [%s], leaf[%s]" % (self.type, self.leaf)
 
-    ## eq 연산자
+    # eq 연산자
     #
     def __eq__(self, tmp):
-        if type(tmp) != Node: return False
-
-        if self.type != tmp.type or self.leaf != tmp.leaf: return False
-        if len(self.children) != len(tmp.children): return False
+        if type(tmp) != Node:
+            return False
+        if self.type != tmp.type or self.leaf != tmp.leaf:
+            return False
+        if len(self.children) != len(tmp.children):
+            return False
 
         count = len(self.children)
 
@@ -102,54 +105,54 @@ class Node(object):
         return True
 
     def clone(self):
-        newNode = Node(self.type, None, self.leaf)
+        new_node = Node(self.type, None, self.leaf)
         for child in self.children:
-            newNode.children.append(child.clone())
-        return newNode
+            new_node.children.append(child.clone())
+        return new_node
 
-    ## Rule 정의 함수
+    # Rule 정의 함수
     #
-    def SetRule(self, rule):
+    def set_rule(self, rule):
         self.rule = rule
 
-    ## type 이름과 leaf 이름을 바탕으로 인덱스 리턴
+    # type 이름과 leaf 이름을 바탕으로 인덱스 리턴
     #  0 이상의 값이면 해당 인덱스
     #  -1 이면 해당 노드 없음
-    def indexChild(self, type_name=None, leaf_name=None):
+    def index_child(self, type_name=None, leaf_name=None):
         for child in self.children:
-            if child.type == type_name and leaf_name == None:
+            if child.type == type_name and leaf_name is None:
                 return self.chidren.index(child)
-            elif type_name == None and child.leaf == leaf_name:
+            elif type_name is None and child.leaf == leaf_name:
                 return self.chidren.index(child)
             elif child.type == type_name and child.leaf == leaf_name:
                 return self.chidren.index(child)
         return -1
 
-    ## type 이름과 leaf 이름을 바탕으로 해당 노드가 있는지 확인
+    # type 이름과 leaf 이름을 바탕으로 해당 노드가 있는지 확인
     #
-    def existChild(self, type_name=None, leaf_name=None):
+    def exist_child(self, type_name=None, leaf_name=None):
         for child in self.children:
-            if child.type == type_name and leaf_name == None:
+            if child.type == type_name and leaf_name is None:
                 return True
-            elif type_name == None and child.leaf == leaf_name:
+            elif type_name is None and child.leaf == leaf_name:
                 return True
             elif child.type == type_name and child.leaf == leaf_name:
                 return True
 
         return False
 
-    ## 해당하는 모든 하위 노드 리턴
+    # 해당하는 모든 하위 노드 리턴
     #
-    def getAllChild(self, type_name=None, leaf_name=None):
+    def get_all_child(self, type_name=None, leaf_name=None):
         return_list = []
         for child in self.children:
-            if child.type == type_name and leaf_name == None:
+            if child.type == type_name and leaf_name is None:
                 return_list.append(child)
-            elif type_name == None and child.leaf == leaf_name:
+            elif type_name is None and child.leaf == leaf_name:
                 return_list.append(child)
             elif child.type == type_name and child.leaf == leaf_name:
                 return_list.append(child)
-            elif type_name == None and leaf_name == None:
+            elif type_name is None and leaf_name is None:
                 return self.children
 
         return return_list
@@ -175,18 +178,18 @@ class Node(object):
             raise (Exception, "Node Print Error!!!!!")
 
         for n in node.children:
-            self.debug_node(self, n, cur_inden)
+            self.debug_node(n, cur_inden)
 
     def debug_tree(self, node):
 
         try:
             for n in node.children:
                 if n.leaf == '_expr':
-                    self.debug_tree(self, n)
+                    self.debug_tree(n)
                 elif len(n.children) > 1:
-                    self.debug_tree(self, n.children[0])
+                    self.debug_tree(n.children[0])
                     print(n.leaf, end=' ')
-                    self.debug_tree(self, n.children[1])
+                    self.debug_tree(n.children[1])
                 elif len(n.children) == 0:
                     print(n.leaf, end=' ')
 
@@ -211,7 +214,7 @@ class Node(object):
             if len(node.children) > 0:
                 for n in node.children:
                     temp_dict = {}
-                    py_dict["children"].append(self.to_dict_from_node(self, n, temp_dict))
+                    py_dict["children"].append(self.to_dict_from_node(n, temp_dict))
 
         except Exception as e:
             print("***", type(node), node)
@@ -224,3 +227,6 @@ class Node(object):
         node = self.to_dict_from_node(node)
         return json.dumps(node, indent=2)
 
+    # noinspection PyMethodMayBeStatic
+    def to_dict_from_json_string(self, json_data):
+        return json.loads(json_data)
