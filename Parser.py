@@ -3,6 +3,7 @@
 import os.path
 import ply.lex as lex
 import ply.yacc as yacc
+import json
 
 from __init__ import Node
 
@@ -198,10 +199,12 @@ if __name__ == "__main__":
         nod.debug_tree(s.get_root())
         print()
         print("-------------")
-        print(nod.to_dict_from_node(s.get_root(), {}))
-        print("-------------")
-        a = nod.to_json_string_from_dict(s.get_root())
+        a = nod.to_dict_from_node(s.get_root(), {})
         print(a)
         print("-------------")
-        print(nod.to_dict_from_json_string(a))
+        a = nod.to_json_string_from_dict(a)
+        print(a)
+        print("-------------")
+        a = nod.to_node_from_json(a)
+        print(nod.debug_node(a))
         print("-------------")

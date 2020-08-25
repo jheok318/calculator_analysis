@@ -87,7 +87,16 @@ calc> 1-2;
   ]
 }
 -------------
-#Json Data를 다시 diction형태로 변환 시킬수 있다.
-{'type': 'CONTAINER', 'leaf': '_root', 'rule': '', 'children': [{'type': 'CONTAINER', 'leaf': '_expr', 'rule': '', 'children': [{'type': 'OPERATION', 'leaf': '-', 'rule': '', 'children': [{'type': 'CONTAINER', 'leaf': '_expr', 'rule': '', 'children': [{'type': 'NUMBER', 'leaf': '1', 'rule': '', 'children': []}]}, {'type': 'CONTAINER', 'leaf': '_expr', 'rule': '', 'children': [{'type': 'NUMBER', 'leaf': '2', 'rule': '', 'children': []}]}]}]}, {'type': 'calc_END', 'leaf': ';', 'rule': '', 'children': []}]}
+# Json Data를 다시 Node의 형태로 만들수 있다.
+# Node로 만든 형태를 다시 그래프로 확인할 수 있다.
+*    root <CONTAINER>
+*      _expr <CONTAINER>
+*        - <OPERATION>
+*          _expr <CONTAINER>
+*            1 <NUMBER>
+*          _expr <CONTAINER>
+*            2 <NUMBER>
+*      ; <calc_END>
+None
 ```
 
